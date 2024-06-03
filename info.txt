@@ -1,0 +1,21 @@
+Se accede a la aplicación "elaparato" desde la aplicación gateway, la cual se ejecuta en el puerto 8080.
+"elaparato" está en el puerto 8081.
+Además, Keycloak está configurado en el puerto 8082.
+
+En la consola de Keycloak cree un reino llamado "el-aparato-delabarrera".
+Dentro de este reino configuré dos clientes: "gateway" y "users".
+El cliente "gateway" está destinado a la aplicación gateway, encargada de gestionar la autenticación y autorización para determinar quién tiene acceso a qué recursos.
+La aplicación "elaparato" actúa como servidor de recursos (resource server) y contiene los endpoints a los que se desea acceder.
+
+Dentro de la aplicación "elaparato" cree la clase "Users" para administrar los usuarios. Para esta clase, configuré un cliente adicional en Keycloak llamado "users", encargado de la gestión de usuarios.
+
+Con respecto a los roles, cree los mismos a nivel de reino en Keycloak, definiendo tres roles: "app_admin", "app_vendedor" y "app_repositor".
+Con relación a la configuración de roles en la aplicación "elaparato", implementé el enfoque a nivel de reino dentro del directorio de seguridad en la clase JwtAuthConverter, pero de cualquier forma deje comentada la configuración a nivel de clase.
+
+
+
+ADICIONAL:
+Deje además dentro de la carpeta general del proyecto:
+- El docker-compose con la configuración necesaria para crear el contenedor con MySQL.
+- El archivo elaparato-delabarrera.sql con las sentencias para generar las primeras ventas y productos.
+- El archivo formato .json del reino creado en keycloak.

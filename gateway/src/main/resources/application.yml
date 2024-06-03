@@ -1,0 +1,28 @@
+server:
+  port: 8080
+
+spring:
+  security:
+    oauth2:
+      client:
+        provider:
+          api-gateway-service:
+            issuer-uri: http://localhost:8082/realms/el-aparato-delabarrera
+        registration:
+          api-gateway-service:
+            provider: api-gateway-service
+            client-id: gateway
+            client-secret: plqmlyYri1jX1wRgcg3VC6zuY4jG4Jih
+            scope: openid
+            authorization-grant-type: authorization_code
+            redirect-uri: http://localhost:8080/login/oauth2/code/keycloak
+
+  cloud:
+    gateway:
+      default-filters:
+        - TokenRelay
+      routes:
+        - id: elaparato
+          uri: http://localhost:8081
+          predicates:
+            - Path=/**
